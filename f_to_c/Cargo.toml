@@ -1,0 +1,6 @@
+[package]
+name = "f_to_c"
+version = "0.1.0"
+authors = ["William M Holbrook II <wmh@fastmail.com>"]
+
+[dependencies]

@@ -1,0 +1,35 @@
+Things I've learned from this exercise:
+
+1. Doctests are only ran when doctests are present in library files, NOT
+   binary projects. This means that the doctests in temperature.rs won't be
+   run when executing 'cargo test'.
+
+2. I don't understand modules and crates yet.
+
+3. Explicit types are sometimes necessary. Not sure about the rules on those
+   just yet.
+
+4. I don't particularly care for the "thing1 to thing2" naming of methods.
+   Example: "f_to_c". It reads backwards from the order in which types are
+   used on a line.
+
+   Example:
+
+       let celsius = f_to_c(fahrenheit);
+
+   In this example, it reads celsius->f to c->fahrenheit. To make more sense,
+   it could be written so that it reads celsius->c from f->fahrenheit.
+
+   Example:
+
+       let celsius = c_from_f(fahrenheit);
+
+
+5. Unit tests in rust are to be written in the files that contain the
+   functions being unit tested. Integration tests go under tests/.
+
+   I feel torn by this one. On one hand, I think it's nice to keep the test
+   functions close to the code that's being tested. On the other hand,
+   including testing functions in the same file with the code that goes out
+   the door feels wrong and dirty. Additionally, this can make the file that
+   holds the code and the tests get quite long and difficult to navigate.
