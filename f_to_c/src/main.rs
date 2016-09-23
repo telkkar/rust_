@@ -1,11 +1,37 @@
+use std::io::prelude::*;
+use std::io;
+
 mod temperature;
 
 fn main() {
-    println!("Hello, world!");
+	println!("Fahrenheit to Celsius converter");
+	println!("");
 
-	let fahrenheit = 32f32;
+	loop {
+		print!("Fahrenheit value:");
+		io::stdout().flush().ok().expect("Could not flush stdout");
 
-	println!("F: {0}, C: {1}", fahrenheit, temperature::f_to_c(fahrenheit));
+		let mut fahrenheit = String::new();
 
+		io::stdin().read_line(&mut fahrenheit)
+		    .expect("Failed to read line.");
+
+		let fahrenheit = fahrenheit.trim();
+
+		if fahrenheit == "" {
+			break;
+		}
+
+		let fahrenheit: f32 = match fahrenheit.parse::<f32>() {
+			Ok(num) => num,
+			Err(_)  => {
+				println!("You didn't enter a number. Please enter a number.");
+				println!("");
+				continue;
+			}
+		};
+
+		println!("F: {0}, C: {1}", fahrenheit, temperature::f_to_c(fahrenheit));
+	}
 }
 
