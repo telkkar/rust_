@@ -3,7 +3,7 @@
 //! The `fuzzy_search` crate provides functions that perform fuzzy searches.
 //!
 //! ```
-//! assert_eq!(fuzzy_search::fuzzy_search_match("fu_rch_match", "fuzzy_search_match"), true);
+//! assert_eq!(fuzzy_search::fuzzy_search_match("fuzzy_search_match", "fu_rch_match"), true);
 //! ```
 
 
@@ -17,15 +17,15 @@
 /// ```
 /// use fuzzy_search::fuzzy_search_match;
 ///
-/// assert_eq!(fuzzy_search_match("abc", "Alaska Beer Crusade"), false);
+/// assert_eq!(fuzzy_search_match("Alaska Beer Crusade", "abc"), false);
 /// ```
 ///
 /// ```
 /// use fuzzy_search:: fuzzy_search_match;
 ///
-/// assert_eq!(fuzzy_search_match("abc", "abcdefg"), true);
+/// assert_eq!(fuzzy_search_match("abcdefg", "abc"), true);
 /// ```
-pub fn fuzzy_search_match(search_string: &str, reference_string: &str) -> bool {
+pub fn fuzzy_search_match(reference_string: &str, search_string: &str) -> bool {
 	fuzzy_search(reference_string, search_string)
 }
 
@@ -61,7 +61,7 @@ mod tests {
 		let expected_value: bool = true;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
@@ -75,7 +75,7 @@ mod tests {
 		let expected_value: bool = false;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
@@ -89,7 +89,7 @@ mod tests {
 		let expected_value: bool = true;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
@@ -103,7 +103,7 @@ mod tests {
 		let expected_value: bool = true;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
@@ -117,7 +117,7 @@ mod tests {
 		let expected_value: bool = true;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
@@ -131,7 +131,7 @@ mod tests {
 		let expected_value: bool = true;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
@@ -145,7 +145,7 @@ mod tests {
 		let expected_value: bool = true;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
@@ -159,7 +159,7 @@ mod tests {
 		let expected_value: bool = false;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
@@ -187,7 +187,7 @@ mod tests {
 		let expected_value: bool = false;
 
 		// Act
-		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+		let actual_value: bool = fuzzy_search_match(&reference_string, &search_string);
 
 		// Assert
 		assert_eq!(expected_value, actual_value);
