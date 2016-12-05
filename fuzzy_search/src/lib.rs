@@ -26,54 +26,26 @@
 /// assert_eq!(fuzzy_search_match("abc", "abcdefg"), true);
 /// ```
 pub fn fuzzy_search_match(search_string: &str, reference_string: &str) -> bool {
-	recursive_fuzzy_search(search_string, reference_string)
+	fuzzy_search(reference_string, search_string)
 }
 
-fn recursive_fuzzy_search(search_string: &str, reference_string: &str) -> bool {
-	let search_len: usize = search_string.len();
-	let reference_len: usize = reference_string.len();
+fn fuzzy_search(reference_string: &str, search_string: &str) -> bool {
+	let mut search_iterator = search_string.chars();
+	let mut search = search_iterator.next();
 
-	if search_string == "" {
-		return true;
-	}
-
-	if reference_string == "" {
-		return false;
-	}
-
-	// Search strings longer than the reference strings are not valid
-	if reference_len < search_len {
-		return false;
-	}
-
-	for (search_index, search_value) in search_string.char_indices() {
-		// Case where all chars in search string are found
-		if search_index == search_len {
-			return true;
-		}
-
-		for (reference_index, reference_value) in reference_string.char_indices() {
-			if search_value == reference_value {
-				let (_, rhs_reference_substring) = reference_string.split_at(find_next_char_boundary(reference_string, reference_index));
-				let (_, rhs_search_substring) = search_string.split_at(find_next_char_boundary(search_string, search_index));
-				return recursive_fuzzy_search(rhs_search_substring, rhs_reference_substring);
+	for ref_char in reference_string.chars() {
+		match search {
+			Some(search_char) => {
+				if search_char == ref_char {
+					search = search_iterator.next();
+					continue;
+				}
 			}
-		}
-
-		return false;
-	}
-
-	false
-}
-
-fn find_next_char_boundary(string: &str, index: usize) -> usize {
-	for offset in 1..string.len() + 1 {
-		if string.is_char_boundary(index + offset) {
-			return index + offset;
+			None => return true
 		}
 	}
 
-	index
+	search == None
 }
 
 
