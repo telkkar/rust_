@@ -192,4 +192,32 @@ mod tests {
 		// Assert
 		assert_eq!(expected_value, actual_value);
 	}
+
+	#[test]
+	fn fuzzy_search_match_split_characters_false() {
+		// This one needs a bit of explaining, and is derived from the second example under
+		// https://doc.rust-lang.org/std/primitive.str.html#examples-9
+		// There's a chance that two or more characters combine to make a grapheme cluster, but are
+		// Found in different locations in the string. Take the string, as chars,
+		//
+		//     yay\u{0306}  (yay̆, the y has a breve)
+		//
+		// And the string below
+		//
+		//     yao\u{0306}  (yaŏ, the o has a breve)
+		//
+		// Searching for the string "y̆" can match the second string if the grapheme is split into
+		// two characters -- the 'y' and the breve.
+
+		// Arrange
+		let search_string: String = String::from("y̆");
+		let reference_string: String = String::from("yaŏ");
+		let expected_value: bool = false;
+
+		// Act
+		let actual_value: bool = fuzzy_search_match(&search_string, &reference_string);
+
+		// Assert
+		assert_eq!(expected_value, actual_value);
+	}
 }
